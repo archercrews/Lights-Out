@@ -6,7 +6,6 @@ angular
   .directive('sampleComponent', sampleComponent);
 
   function sampleComponent(){
-    console.log('sampleComponent');
     var directive = {
       templateUrl: 'app/components/sample-component/sample-component.html',
       controller: Controller
@@ -16,10 +15,6 @@ angular
   }
 
   function Controller() {
-    console.log('controller');
 
-    function link(scope, element, attrs) {
-      
-    }
   }
 })();
