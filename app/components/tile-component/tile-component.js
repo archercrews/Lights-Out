@@ -13,14 +13,17 @@ angular
       bindToController: true,
       scope: {
         onColor: '=?tcOnColor',
-        offColor: '=?tcOffColor'
+        offColor: '=?tcOffColor',
+        tile: '=tcTile'
       }
     };
 
     return directive;
   }
 
-  function Controller() {
+  Controller.$inject = ['Tile'];
+
+  function Controller(Tile) {
     var vm = this;
 
     if(!vm.onColor) {
