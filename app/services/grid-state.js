@@ -6,13 +6,14 @@ angular
   .service('gridState', gridStateService);
 
     gridStateService.$inject = ['Tile'];
-    function gridStateService(Tile) {
+    function gridStateService(Tile, $scope) {
       var grid = [
         [new Tile(), new Tile(), new Tile()],
         [new Tile(), new Tile(), new Tile()]
       ];
       var service = {
-        grid: grid
+        grid: grid,
+        tileChanged: function(){}
       };
 
       return service;

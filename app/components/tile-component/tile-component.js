@@ -38,7 +38,8 @@ angular
     vm.tileClick = tileClick;
 
     function tileClick() {
-      if(vm.tileStyle.backgroundColor === vm.onColor){
+      vm.tile.toggle();
+      if(vm.tile.isOn){
         vm.tileStyle.backgroundColor = vm.offColor;
       }
       else {
