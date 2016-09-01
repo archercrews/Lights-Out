@@ -21,10 +21,11 @@ angular
     return directive;
   }
 
-  Controller.$inject = ['Tile'];
+  Controller.$inject = ['Tile', '$scope', 'gridState'];
 
-  function Controller(Tile) {
+  function Controller(Tile, $scope, gridState) {
     var vm = this;
+    vm.gridState = gridState;
 
     if(!vm.onColor) {
       vm.onColor = 'yellow';
@@ -35,10 +36,10 @@ angular
     vm.tileStyle = {
       backgroundColor: vm.offColor
     };
-    vm.tileClick = tileClick;
-
-    function tileClick() {
-      vm.tile.toggle();
+    
+    $scope.$watch(function() {
+      return vm.tile.isOn;
+    },    function () {
       if(vm.tile.isOn){
         vm.tileStyle.backgroundColor = vm.offColor;
       }
@@ -47,6 +48,6 @@ angular
       }
 
 
-    };
+    });
   }
 })();

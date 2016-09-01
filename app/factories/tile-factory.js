@@ -5,18 +5,23 @@ angular
   .module('myApp')
   .factory('Tile', tileFactory)
     function tileFactory() {
-      var isOn = false;
-      var x,y;
+
+      var isValid = function(coordinate) {
+          return coordinate !== null && typeof coordinate === 'number';
+          };
 
       function Tile(enteredX, enteredY) {
+        var tileOn = false;
+        var x,y;
+
         Object.defineProperty(this, 'isOn', {
           enumerable: true,
           configurable: false,
           get: function(){
-            return isOn;
+            return tileOn;
           },
           set: function(value){
-            isOn = value;
+            tileOn = value;
           }
 
         });
@@ -58,14 +63,20 @@ angular
             y = angular.copy(enteredY);
         }
 
-      Tile.prototype.toggle = function(){
-        isOn = !isOn;
-      }
 
-      isValid = function(coordinate) {
-        return coordinate !== null && typeof coordinate === 'number';
-        };
 
-      return Tile;
+
+
+
+
+
     }
+
+    Tile.prototype.toggle = function(){
+      this.isOn = !this.isOn;
+
+    }
+
+    return Tile;
+  }
 })();

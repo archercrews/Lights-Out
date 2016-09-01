@@ -6,9 +6,10 @@
   "scripts": {
     "start": "lite-server"
   },
-  "dependencies":{
-    "angular":          "1.5.8",
-    "angular-route":    "1.5.8"
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-route": "1.5.8",
+    "lodash": "^4.15.0"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
