@@ -15,14 +15,32 @@ angular
       var service = {
         grid: grid,
         tileChanged: function(tile){
+          // Switches the clicked tile
           tile.toggle();
+
           var tiles = _.flatten(grid);
-          var foundTile = _.find(tiles, function(t) {
-            return tile.x -1 == t.x && tile.y == t.y;
+
+          _.each(getSurroundingCoordinates(tile), function(coordinate) {
+              var otherTile = _.find(tiles, function(t) {
+                return t.x == coordinate.x && t.y == coordinate.y;
+              });
+              if(otherTile){
+                otherTile.toggle();
+              }
           });
-          foundTile.toggle();
         }
       };
+      function getSurroundingCoordinates(tile){
+        var surroundingCoordinates = [];
+
+         surroundingCoordinates.push({ x: tile.x -1, y: tile.y });
+         surroundingCoordinates.push({ x: tile.x +1, y: tile.y });
+         surroundingCoordinates.push({ x: tile.x, y: tile.y -1 });
+         surroundingCoordinates.push({ x: tile.x, y: tile.y +1 });
+
+         return surroundingCoordinates;
+      };
+
 
       return service;
     }

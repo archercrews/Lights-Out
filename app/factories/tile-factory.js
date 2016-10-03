@@ -5,11 +5,12 @@ angular
   .module('myApp')
   .factory('Tile', tileFactory)
     function tileFactory() {
-
+      // Checks that coordinates are not null and of type number
       var isValid = function(coordinate) {
           return coordinate !== null && typeof coordinate === 'number';
           };
 
+      
       function Tile(enteredX, enteredY) {
         var tileOn = false;
         var x,y;
@@ -58,24 +59,17 @@ angular
           }
         });
 
+        // Checks that the entered coordinates are valid
         if(isValid(enteredX) && isValid(enteredY)) {
             x = angular.copy(enteredX);
             y = angular.copy(enteredY);
         }
-
-
-
-
-
-
-
-
     }
 
+    // Changes the tile value of isOn to true/false
     Tile.prototype.toggle = function(){
       this.isOn = !this.isOn;
-
-    }
+    };
 
     return Tile;
   }

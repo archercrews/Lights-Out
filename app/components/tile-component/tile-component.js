@@ -27,27 +27,31 @@ angular
     var vm = this;
     vm.gridState = gridState;
 
+    // Sets the tile on and off colors if they don't already exist
     if(!vm.onColor) {
       vm.onColor = 'yellow';
     }
     if(!vm.offColor) {
       vm.offColor = 'black';
     }
+
+    // Sets the default tile color upon starting the app
     vm.tileStyle = {
       backgroundColor: vm.offColor
     };
-    
+
+    // Watches for a change of the isOn value in tile factory
+    // and sets the color of the tile based on the value of tile.isOn
     $scope.$watch(function() {
       return vm.tile.isOn;
-    },    function () {
+    },
+    function () {
       if(vm.tile.isOn){
-        vm.tileStyle.backgroundColor = vm.offColor;
-      }
-      else {
         vm.tileStyle.backgroundColor = vm.onColor;
       }
-
-
+      else {
+        vm.tileStyle.backgroundColor = vm.offColor;
+      }
     });
   }
 })();
