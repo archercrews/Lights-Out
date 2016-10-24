@@ -5,8 +5,9 @@ angular
   .module('myApp')
   .service('gridState', gridStateService);
 
-    gridStateService.$inject = ['Tile'];
-    function gridStateService(Tile) {
+    gridStateService.$inject = ['Tile', '$timeout'];
+
+    function gridStateService(Tile, $timeout) {
       var grid = [
         [new Tile(0,0), new Tile(1,0), new Tile(2,0)],
         [new Tile(0,1), new Tile(1,1), new Tile(2,1)],
@@ -17,7 +18,7 @@ angular
         tileChanged: function(tile){
           // Switches the clicked tile
           tile.toggle();
-
+          // Gets the coordinates of the tiles surrounding the tile that was clicked
           var tiles = _.flatten(grid);
 
           _.each(getSurroundingCoordinates(tile), function(coordinate) {
@@ -28,8 +29,24 @@ angular
                 otherTile.toggle();
               }
           });
+          // Flattens the grid array to be a single array of tiles
+          var results = _.flatMap(grid, function(row) {
+            return _.flatMap(row, function(tile) {
+              return tile;
+            });
+          });
+
+          if(_.every(results, function(tile) {
+              return tile.isOn;
+          })) {
+            $timeout(function() {
+              alert("You win!");
+            });
+          }
         }
       };
+
+
       function getSurroundingCoordinates(tile){
         var surroundingCoordinates = [];
 
