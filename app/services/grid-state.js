@@ -18,9 +18,9 @@ angular
         tileChanged: function(tile){
           // Switches the clicked tile
           tile.toggle();
-          // Gets the coordinates of the tiles surrounding the tile that was clicked
-          var tiles = _.flatten(grid);
 
+          var tiles = _.flatten(grid);
+          // Gets the coordinates of the tiles surrounding the tile that was clicked
           _.each(getSurroundingCoordinates(tile), function(coordinate) {
               var otherTile = _.find(tiles, function(t) {
                 return t.x == coordinate.x && t.y == coordinate.y;
@@ -36,6 +36,7 @@ angular
             });
           });
 
+          // Alerts the user if they've turned off all tiles
           if(_.every(results, function(tile) {
               return tile.isOn;
           })) {
